@@ -31,12 +31,12 @@
 <!--             <AppenderRef ref="SpringBoot-File-Appender"/> -->
             <AppenderRef ref="Console-Appender"/>
         </Logger>
-        <Logger name="com.mono.myRecipeDB" level="debug" additivity="false"> <!-- Name MUSS Projekt-Paket entsprechen -->
-            <AppenderRef ref="App-File-Appender"/>
-            <AppenderRef ref="Console-Appender"/>
-         </Logger>
-        <Root>
-            <AppenderRef ref="Console-Appender"/>
-        </Root>
-    </Loggers>
-</Configuration>
+        <Logger name="com.mono.myrecipedb" level="debug" additivity="false"> <!-- Name MUSS Projekt-Paket entsprechen -->
+            <!--           <AppenderRef ref="App-File-Appender"/> -->
+                <AppenderRef ref="Console-Appender"/>
+                     </Logger>
+                    <Root>
+                        <AppenderRef ref="Console-Appender"/>
+                    </Root>
+                </Loggers>
+            </Configuration>

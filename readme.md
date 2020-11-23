@@ -18,19 +18,11 @@
 application.properties
 
 ## parameter - siehe application Properties
-* Generic H2 (embedded)
-* Generic H2 (embedded)
-* org.h2.Driver
-* jdbc:h2:mem:testdb
-* sa
-* password
+* User: admin
+* password: admin
 
 ## Links
 
-* https://www.h2database.com/html/main.html
-* http://www.h2database.com/html/grammar.html
-* https://www.baeldung.com/spring-boot-h2-database
-* https://docs.spring.io/spring-data/data-commons/docs/1.6.1.RELEASE/reference/html/repositories.html
 
 # Feature
 * findAll
@@ -40,4 +32,3 @@ application.properties
 * set/update done 
 
 # TODO 
-* DB austauschen z.b. MySQl
