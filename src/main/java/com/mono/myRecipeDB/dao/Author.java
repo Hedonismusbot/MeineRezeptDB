@@ -6,4 +6,7 @@ public class Author {
 
     }
 
+    public void te2st (){
+
+    }
 }
