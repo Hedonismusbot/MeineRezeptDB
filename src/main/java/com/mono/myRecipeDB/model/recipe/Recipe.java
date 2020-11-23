@@ -5,9 +5,10 @@ import java.util.List;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import javax.persistence.Entity;
+
 public class Recipe implements Serializable
 {
-
     @SerializedName("@context")
     @Expose
     private String context;
@@ -23,6 +24,9 @@ public class Recipe implements Serializable
     @SerializedName("author")
     @Expose
     private Author author;
+    @SerializedName("keywords")
+    @Expose
+    private String keywords;
     @SerializedName("image")
     @Expose
     private String image;
@@ -35,25 +39,65 @@ public class Recipe implements Serializable
     @SerializedName("recipeInstructions")
     @Expose
     private List<String> recipeInstructions = null;
+    @SerializedName("prepTime")
+    @Expose
+    private String prepTime;
+    @SerializedName("cookTime")
+    @Expose
+    private String cookTime;
+    @SerializedName("totalTime")
+    @Expose
+    private String totalTime;
     @SerializedName("recipeYield")
     @Expose
     private Integer recipeYield;
+    @SerializedName("recipeCategory")
+    @Expose
+    private String recipeCategory;
+    @SerializedName("cookingMethod")
+    @Expose
+    private String cookingMethod;
+    @SerializedName("recipeCuisine")
+    @Expose
+    private String recipeCuisine;
     @SerializedName("aggregateRating")
     @Expose
     private AggregateRating aggregateRating;
-    @SerializedName("video")
+    @SerializedName("nutrition")
     @Expose
-    private Video video;
+    private Nutrition nutrition;
     @SerializedName("review")
     @Expose
     private List<Review> review = null;
     @SerializedName("datePublished")
     @Expose
     private String datePublished;
-    @SerializedName("keywords")
+    @SerializedName("tool")
     @Expose
-    private String keywords;
-    private final static long serialVersionUID = -4307267875591997686L;
+    private List<Object> tool = null;
+    private final static long serialVersionUID = 930431040469941610L;
+
+    // Variablen
+
+
+    private String folderPath;
+    private int mySQLLiteId;
+
+    public int getSQLLiteId() {
+        return mySQLLiteId;
+    }
+
+    public void setSQLLiteId(int id) {
+        this.mySQLLiteId = id;
+    }
+
+    public String getFolderPath() {
+        return folderPath;
+    }
+
+    public void setFolderPath(String folderPath) {
+        this.folderPath = folderPath;
+    }
 
     public String getContext() {
         return context;
@@ -120,6 +164,19 @@ public class Recipe implements Serializable
         return this;
     }
 
+    public String getKeywords() {
+        return keywords;
+    }
+
+    public void setKeywords(String keywords) {
+        this.keywords = keywords;
+    }
+
+    public Recipe withKeywords(String keywords) {
+        this.keywords = keywords;
+        return this;
+    }
+
     public String getImage() {
         return image;
     }
@@ -172,6 +229,45 @@ public class Recipe implements Serializable
         return this;
     }
 
+    public String getPrepTime() {
+        return prepTime;
+    }
+
+    public void setPrepTime(String prepTime) {
+        this.prepTime = prepTime;
+    }
+
+    public Recipe withPrepTime(String prepTime) {
+        this.prepTime = prepTime;
+        return this;
+    }
+
+    public String getCookTime() {
+        return cookTime;
+    }
+
+    public void setCookTime(String cookTime) {
+        this.cookTime = cookTime;
+    }
+
+    public Recipe withCookTime(String cookTime) {
+        this.cookTime = cookTime;
+        return this;
+    }
+
+    public String getTotalTime() {
+        return totalTime;
+    }
+
+    public void setTotalTime(String totalTime) {
+        this.totalTime = totalTime;
+    }
+
+    public Recipe withTotalTime(String totalTime) {
+        this.totalTime = totalTime;
+        return this;
+    }
+
     public Integer getRecipeYield() {
         return recipeYield;
     }
@@ -182,6 +278,45 @@ public class Recipe implements Serializable
 
     public Recipe withRecipeYield(Integer recipeYield) {
         this.recipeYield = recipeYield;
+        return this;
+    }
+
+    public String getRecipeCategory() {
+        return recipeCategory;
+    }
+
+    public void setRecipeCategory(String recipeCategory) {
+        this.recipeCategory = recipeCategory;
+    }
+
+    public Recipe withRecipeCategory(String recipeCategory) {
+        this.recipeCategory = recipeCategory;
+        return this;
+    }
+
+    public String getCookingMethod() {
+        return cookingMethod;
+    }
+
+    public void setCookingMethod(String cookingMethod) {
+        this.cookingMethod = cookingMethod;
+    }
+
+    public Recipe withCookingMethod(String cookingMethod) {
+        this.cookingMethod = cookingMethod;
+        return this;
+    }
+
+    public String getRecipeCuisine() {
+        return recipeCuisine;
+    }
+
+    public void setRecipeCuisine(String recipeCuisine) {
+        this.recipeCuisine = recipeCuisine;
+    }
+
+    public Recipe withRecipeCuisine(String recipeCuisine) {
+        this.recipeCuisine = recipeCuisine;
         return this;
     }
 
@@ -198,16 +333,16 @@ public class Recipe implements Serializable
         return this;
     }
 
-    public Video getVideo() {
-        return video;
+    public Nutrition getNutrition() {
+        return nutrition;
     }
 
-    public void setVideo(Video video) {
-        this.video = video;
+    public void setNutrition(Nutrition nutrition) {
+        this.nutrition = nutrition;
     }
 
-    public Recipe withVideo(Video video) {
-        this.video = video;
+    public Recipe withNutrition(Nutrition nutrition) {
+        this.nutrition = nutrition;
         return this;
     }
 
@@ -237,16 +372,16 @@ public class Recipe implements Serializable
         return this;
     }
 
-    public String getKeywords() {
-        return keywords;
+    public List<Object> getTool() {
+        return tool;
     }
 
-    public void setKeywords(String keywords) {
-        this.keywords = keywords;
+    public void setTool(List<Object> tool) {
+        this.tool = tool;
     }
 
-    public Recipe withKeywords(String keywords) {
-        this.keywords = keywords;
+    public Recipe withTool(List<Object> tool) {
+        this.tool = tool;
         return this;
     }
 
