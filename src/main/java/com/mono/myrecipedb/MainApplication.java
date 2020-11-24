@@ -11,7 +11,8 @@ import org.springframework.web.client.RestTemplate;
 public class MainApplication {
 
     static Logger log = LogManager.getLogger() ;
-    // Rezept Ordner Pfad:
+
+    // Rezept Ordner Pfad: (Wird auch von Controller benutzt über statischen Import)
     public static final String recipeDirectoryPath = "D:\\Nextcloud\\Rezepte";
 
     private static final String GET_ALL= "http://localhost:8080/recipes";
