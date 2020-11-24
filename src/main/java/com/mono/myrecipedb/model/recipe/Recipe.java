@@ -2,11 +2,12 @@ package com.mono.myrecipedb.model.recipe;
 
 import java.io.Serializable;
 import java.util.List;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mono.myrecipedb.model.RecipeSqlLite;
 
-public class Recipe implements Serializable
-{
+public class Recipe extends RecipeSqlLite implements Serializable {
     @SerializedName("@context")
     @Expose
     private String context;
@@ -76,17 +77,27 @@ public class Recipe implements Serializable
     private final static long serialVersionUID = 930431040469941610L;
 
     // Variablen
-
-
+    private int sqlLiteId;
     private String folderPath;
-    private int mySQLLiteId;
 
-    public int getSQLLiteId() {
-        return mySQLLiteId;
+    public Recipe(){
     }
 
-    public void setSQLLiteId(int id) {
-        this.mySQLLiteId = id;
+
+    public Recipe(int id , String folderPath){
+        setsqlLiteId(id);
+        setFolderPath(folderPath);
+    }
+
+
+
+
+    public int getsqlLiteId() {
+        return sqlLiteId;
+    }
+
+    public void setsqlLiteId(int id) {
+        this.sqlLiteId = id;
     }
 
     public String getFolderPath() {
@@ -383,4 +394,33 @@ public class Recipe implements Serializable
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Recipe{" +
+                "context='" + context + '\'' +
+                ",\n type='" + type + '\'' +
+                ",\n name='" + name + '\'' +
+                ",\n description='" + description + '\'' +
+                ",\n author=" + author +
+                ",\n keywords='" + keywords + '\'' +
+                ",\n image='" + image + '\'' +
+                ",\n url='" + url + '\'' +
+                ",\n recipeIngredient=" + recipeIngredient +
+                ",\n recipeInstructions=" + recipeInstructions +
+                ",\n prepTime='" + prepTime + '\'' +
+                ",\n cookTime='" + cookTime + '\'' +
+                ",\n totalTime='" + totalTime + '\'' +
+                ",\n recipeYield=" + recipeYield +
+                ",\n recipeCategory='" + recipeCategory + '\'' +
+                ",\n cookingMethod='" + cookingMethod + '\'' +
+                ",\n recipeCuisine='" + recipeCuisine + '\'' +
+                ",\n aggregateRating=" + aggregateRating +
+                ",\n nutrition=" + nutrition +
+                ",\n review=" + review +
+                ",\n datePublished='" + datePublished + '\'' +
+                ",\n tool=" + tool +
+                ",\n mySQLLiteId=" + sqlLiteId +
+                ",\n folderPath='" + folderPath + '\'' +
+                '}';
+    }
 }
