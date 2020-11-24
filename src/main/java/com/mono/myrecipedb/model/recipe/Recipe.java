@@ -7,7 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.mono.myrecipedb.model.RecipeSqlLite;
 
-public class Recipe extends RecipeSqlLite implements Serializable {
+public class Recipe  implements Serializable {
     @SerializedName("@context")
     @Expose
     private String context;

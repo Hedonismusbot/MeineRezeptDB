@@ -13,14 +13,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
-import static com.mono.myrecipedb.MainApplication.recipeDirectoryPath;
+import static com.mono.myrecipedb.MainApplication.RECIPE_DIRECTORY_PATH;
 
 @RequestMapping
 @RestController
 public class RecipeController {
 
     //ACHTUNG Rezept Ordner wird in Main Klasse festgelegt
-    public String directoryPath =recipeDirectoryPath;
+    public String directoryPath =RECIPE_DIRECTORY_PATH;
     static Logger log = LogManager.getLogger() ;
 
 
@@ -56,12 +56,10 @@ public class RecipeController {
      * Wegen leerzeichen nicht möglich deshalb werden hier alle Rezepte zurückgegebn die
      * das eingegegeben im Namen beinhalten
      */
-
-
     @GetMapping("/recipe/recipe-by-Name")  //Hier z.B.:   http://localhost:8080/recipe/recipe-by-Name?name=Spaghetti
-    public Recipe getRecipeByName(@RequestParam(name= "name") String path){
+    public List<Recipe> getRecipeByName(@RequestParam(name= "name") String path){
         log.info("/recipes/recipe-by-Name/?name=" + path+ " -> aufgerufen , aktueller Rezept Pfad:" + directoryPath);
-        Recipe m = restService.findRecipeByPath(path);
+        List<Recipe> m = restService.getAllRecipesWithNameContaining(path);
         if (m == null){
             throw new MessageNotFoundException("Rezept nicht gefunden: " + path );
         }

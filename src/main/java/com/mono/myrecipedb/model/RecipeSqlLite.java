@@ -57,5 +57,13 @@ public class RecipeSqlLite {
         this.folderPath = folderPath;
     }
 
-
+    @Override
+    public String toString() {
+        return "RecipeSqlLite{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", folderPath='" + folderPath + '\'' +
+                ", json='" + json + '\'' +
+                '}';
+    }
 }

@@ -13,7 +13,7 @@ public class MainApplication {
     static Logger log = LogManager.getLogger() ;
 
     // ACHTUNG: Rezept Ordner Pfad: (Wird auch von Controller benutzt über statischen Import)
-    public static final String recipeDirectoryPath = "D:\\Nextcloud\\Rezepte";
+    public static final String RECIPE_DIRECTORY_PATH = "D:\\Nextcloud\\Rezepte";
 
     private static final String GET_ALL= "http://localhost:8080/recipes";
     private static final String GET_ONE_BY_ID= "http://localhost:8080/recipe/1";

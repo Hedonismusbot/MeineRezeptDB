@@ -87,11 +87,7 @@ public class RecipeServiceImpl implements RecipeService
         return importetRecipeList;
     }
 
-    @Override
-    public Recipe findRecipeByPath(String path) {
 
-        return null;
-    }
 
     @Override
     public Recipe findRecipeById(int id) {
@@ -99,20 +95,24 @@ public class RecipeServiceImpl implements RecipeService
         Recipe resultRecipe = new Recipe();
         RecipeSqlLite resultRecipeSql = sqlLitedao.findById(id);
         resultRecipe = jdao.convertJsonStringToJavaObject(resultRecipeSql.getJson());
-        resultRecipe.setId(resultRecipeSql.getId());
+        resultRecipe.setsqlLiteId(resultRecipeSql.getId());
         resultRecipe.setFolderPath(resultRecipeSql.getFolderPath());
         return resultRecipe;
     }
 
     @Override
     public List<Recipe> getAllRecipesWithNameContaining(String name) {
-        List<RecipeSqlLite> resultlistSql = sqlLitedao.findAllByNameContains(name);
+        List<RecipeSqlLite> resultlistSql = sqlLitedao.findAllByNameContaining(name);
         List<Recipe> resultlist = new ArrayList<>();
-                log.info("Suchanfrage SQL beinhaltet Name: " + name );
-        log.info("Ergebnis : "+ resultlistSql.toString());
+        log.info("Suchanfrage SQL beinhaltet Name: " + name );
+        log.info("Ergebnis Anzahl : "+ resultlistSql.size());
         for (RecipeSqlLite rez:resultlistSql) {
+
             resultlist.add(new Recipe(rez.getId(), rez.getName()));
+            log.info("Rezept gefunden : "+ rez.getName());
+            log.trace("Rezept gefunden : "+ rez);
         }
+
         return resultlist;
     }
 }
