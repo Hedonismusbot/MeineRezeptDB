@@ -4,7 +4,7 @@ package com.mono.myrecipedb.model;
 import javax.persistence.*;
 
 
-@Entity // Mit Entity Tabellenname im Hybernate default -> klein geschriebener Klassenname
+@Entity (name = "recipes")// Mit Entity Tabellenname im Hybernate default -> klein geschriebener Klassenname
 public class RecipeSqlLite {
 
     @Id

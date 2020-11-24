@@ -8,9 +8,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class RecipeApplication {
+public class MainApplication {
 
     static Logger log = LogManager.getLogger() ;
+    // Rezept Ordner Pfad:
+    public static final String recipeDirectoryPath = "D:\\Nextcloud\\Rezepte";
 
     private static final String GET_ALL= "http://localhost:8080/recipes";
     private static final String GET_ONE= "http://localhost:8080/recipes";
@@ -18,7 +20,7 @@ public class RecipeApplication {
     public static void main(String[] args) {
         log.info("App start");
 
-        SpringApplication.run(RecipeApplication.class, args);
+        SpringApplication.run(MainApplication.class, args);
 
 
         RestTemplate restTemplate = new RestTemplate();

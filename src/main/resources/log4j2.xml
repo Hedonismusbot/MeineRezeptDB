@@ -27,11 +27,11 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="org.springframework.web" level="INFO" additivity="false"><!-- Additiv kann hier false sein nicht unser loggger -->
+        <Logger name="org.springframework.web" level="DEBUG" additivity="false"><!-- Additiv kann hier false sein nicht unser loggger -->
 <!--             <AppenderRef ref="SpringBoot-File-Appender"/> -->
             <AppenderRef ref="Console-Appender"/>
         </Logger>
-        <Logger name="com.mono.myrecipedb" level="debug" additivity="true"> <!-- Name MUSS Projekt-Paket entsprechen-->
+        <Logger name="com.mono.myrecipedb" level="TRACE" additivity="true"> <!-- Name MUSS Projekt-Paket entsprechen-->
             <!--           <AppenderRef ref="App-File-Appender"/> -->
                 <AppenderRef ref="Console-Appender"/>
                      </Logger>

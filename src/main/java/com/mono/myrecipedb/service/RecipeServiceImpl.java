@@ -1,4 +1,4 @@
-package com.mono.myrecipedb.service.rest;
+package com.mono.myrecipedb.service;
 
 import com.mono.myrecipedb.dao.JsonDAO;
 import com.mono.myrecipedb.dao.RecipeSqlLiteDAO;
@@ -26,28 +26,31 @@ public class RecipeServiceImpl implements RecipeService
     @Override
     public List<RecipeSqlLite> getAllRecipes(String directoryPath) {
         // Erzeugt Ordner Namensliste (Entspricht -> Pfad/RezeptNamen)
-        List <File> listofFolderPaths =  ListContentOfDirectory.listContent(directoryPath) ;
+        List <File> listofFolderFiles =  ListContentOfDirectory.listContent(directoryPath) ;
         JsonDAO jdao = new JsonDAO () ;
         List <RecipeSqlLite> importetRecipeList =  new ArrayList<>();
 
-        for ( File folderPath: listofFolderPaths) {
+        for ( File folderFile: listofFolderFiles) {
             try {
-                StringBuilder str= new StringBuilder() ;
+                StringBuilder recipefolderPath= new StringBuilder() ;
                 RecipeSqlLite recipe = new RecipeSqlLite();
-                //
-                str = str.append(directoryPath).append("\\").append(folderPath.getName());
-                recipe.setFolderPath(str.toString());
-                recipe.setName(folderPath.getName());
-                recipe.setJson(jdao.importJsonFile(str.toString() , folderPath.getName() ));
 
+                recipefolderPath = recipefolderPath.append(directoryPath).append("\\").append(folderFile.getName());
+                recipe.setFolderPath(recipefolderPath.toString());
+                recipe.setName(folderFile.getName());
+                recipe.setJson(jdao.importJsonFileToString(recipefolderPath.toString() , folderFile.getName() ));
+                log.debug("Rezept SQL hinzugefügt: " + recipe.getName());
+                log.trace("Daten RezeptSQL \n "+ recipe.toString() );
                 dao.save(recipe);
                 importetRecipeList.add(recipe);
-              //  log.debug("Rezept SQL hinzugefügt: " +directoryPath+"\\"+ folder);
+
             } catch (Exception exception) {
-              //  log.error("Rezept SQL NICHT hinzugefügt: " +directoryPath+"\\"+ folder);
+                log.error("Rezept SQL NICHT hinzugefügt :\n  Pfad: " +directoryPath +"\n Name: "+ folderFile.getName());
+
                 exception.printStackTrace();
             }
         }
+        log.info("Rezepte in SqlLite importiert : " + importetRecipeList.size() );
 
         return importetRecipeList;
     }

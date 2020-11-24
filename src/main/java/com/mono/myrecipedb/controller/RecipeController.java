@@ -4,7 +4,7 @@ package com.mono.myrecipedb.controller;
 import com.mono.myrecipedb.error.MessageNotFoundException;
 import com.mono.myrecipedb.model.RecipeSqlLite;
 import com.mono.myrecipedb.model.recipe.Recipe;
-import com.mono.myrecipedb.service.rest.RecipeService;
+import com.mono.myrecipedb.service.RecipeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,12 +12,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import static com.mono.myrecipedb.MainApplication.recipeDirectoryPath;
 
 @RequestMapping
 @RestController
 public class RecipeController {
 
-    public String directoryPath = "D:\\Nextcloud\\Rezepte";
+    //ACHTUNG Rezept Ordner wird in Main Klasse festgelegt
+    public String directoryPath =recipeDirectoryPath;
     static Logger log = LogManager.getLogger() ;
 
 

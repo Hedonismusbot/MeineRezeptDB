@@ -1,4 +1,4 @@
-package com.mono.myrecipedb.service.rest;
+package com.mono.myrecipedb.service;
 
 import com.mono.myrecipedb.model.RecipeSqlLite;
 import com.mono.myrecipedb.model.recipe.Recipe;
