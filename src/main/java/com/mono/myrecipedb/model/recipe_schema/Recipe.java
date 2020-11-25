@@ -1,11 +1,10 @@
-package com.mono.myrecipedb.model.recipe;
+package com.mono.myrecipedb.model.recipe_schema;
 
 import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.mono.myrecipedb.model.RecipeSqlLite;
 
 public class Recipe  implements Serializable {
     @SerializedName("@context")

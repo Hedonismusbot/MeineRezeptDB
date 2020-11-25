@@ -1,4 +1,4 @@
-package com.mono.myrecipedb.model.recipe;
+package com.mono.myrecipedb.model.recipe_schema;
 
 
 import java.io.Serializable;

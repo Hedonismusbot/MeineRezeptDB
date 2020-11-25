@@ -1,10 +1,10 @@
-package com.mono.myrecipedb.model.recipe;
+package com.mono.myrecipedb.model.recipe_schema;
 
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Author_ implements Serializable
+public class Author implements Serializable
 {
 
     @SerializedName("@type")
@@ -13,7 +13,10 @@ public class Author_ implements Serializable
     @SerializedName("name")
     @Expose
     private String name;
-    private final static long serialVersionUID = 5948518529762800192L;
+    @SerializedName("url")
+    @Expose
+    private String url;
+    private final static long serialVersionUID = 5804942480120007615L;
 
     public String getType() {
         return type;
@@ -23,7 +26,7 @@ public class Author_ implements Serializable
         this.type = type;
     }
 
-    public Author_ withType(String type) {
+    public Author withType(String type) {
         this.type = type;
         return this;
     }
@@ -36,8 +39,21 @@ public class Author_ implements Serializable
         this.name = name;
     }
 
-    public Author_ withName(String name) {
+    public Author withName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public Author withUrl(String url) {
+        this.url = url;
         return this;
     }
 

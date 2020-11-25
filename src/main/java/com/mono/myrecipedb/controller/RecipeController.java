@@ -3,7 +3,7 @@ package com.mono.myrecipedb.controller;
 
 import com.mono.myrecipedb.error.MessageNotFoundException;
 import com.mono.myrecipedb.model.RecipeSqlLite;
-import com.mono.myrecipedb.model.recipe.Recipe;
+import com.mono.myrecipedb.model.recipe_schema.Recipe;
 import com.mono.myrecipedb.service.RecipeService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -23,35 +23,37 @@ public class RecipeController {
     public String directoryPath =RECIPE_DIRECTORY_PATH;
     static Logger log = LogManager.getLogger() ;
 
-
     @Autowired
     private RecipeService restService;
-
-    @PostConstruct
-    public void init(){
-        refreshAllRecipes();
-    }
 
     @GetMapping("/recipes")    // http://localhost:8080/recipes
     public List<String> getAllRecipesFolderNames(){
         log.info("/recipes -> aufgerufen , aktueller Rezept Pfad:" + directoryPath);
-        List <RecipeSqlLite> list= restService.getAllRecipeNames(directoryPath);
+        List <RecipeSqlLite> list= restService.getAllRecipeNamesByFolder(directoryPath);
         List <String> result = new ArrayList<>();
         for (RecipeSqlLite recipe : list) {
-            log.debug("Result Liste hinzugefügt: Id: "+recipe.getId() +" | Name: " + recipe.getName());
+            log.trace("Result Liste hinzugefügt: Id: "+recipe.getId() +" | Name: " + recipe.getName());
             result.add(recipe.getName());
         }
+        log.info("/recipes -> abgearbeitet Rezepte gefunden und hinzugefügt: " + result.size());
         return result;
     }
 
-    @GetMapping("/refreshRecipes")    // http://localhost:8080/recipes
+    @GetMapping("/refreshRecipes")    // http://localhost:8080/refreshRecipes
     public String refreshAllRecipes(){
         log.info("/refreshRecipes -> aufgerufen , aktueller Rezept Pfad:" + directoryPath);
-        List <RecipeSqlLite> list= restService.getAllRecipeNames(directoryPath);
-        log.debug("/refreshRecipes -> aufgerufen , Anzahl gefundener Ordner:" + list.size());
-        return "Anzahl gefundener Ordner:" + list.size();
+        List <RecipeSqlLite> result= restService.refreshAllRecipesSqlLite(directoryPath);
+        log.info("/refreshRecipes ->  abgearbeitet Rezepte gefunden und hinzugefügt: " + result.size());
+        return "Anzahl gefundener Ordner:" + result.size();
     }
 
+    @GetMapping("/deleteAll")    // http://localhost:8080/recipes
+    public void deleteAllSqlLiteRecipes(){
+        log.info("/deleteAll -> aufgerufen , aktueller Rezept Pfad:" + directoryPath);
+        restService.deleteAllRecipeSqlLite();
+
+
+    }
     /**
      * Wegen leerzeichen nicht möglich deshalb werden hier alle Rezepte zurückgegebn die
      * das eingegegeben im Namen beinhalten

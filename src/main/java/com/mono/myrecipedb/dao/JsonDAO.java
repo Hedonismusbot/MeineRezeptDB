@@ -2,7 +2,7 @@ package com.mono.myrecipedb.dao;
 
 
 import com.google.gson.Gson;
-import com.mono.myrecipedb.model.recipe.Recipe;
+import com.mono.myrecipedb.model.recipe_schema.Recipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -42,13 +42,14 @@ public class JsonDAO {
     public String importJsonFileToString(String recipePath , String name ) throws Exception {
         Optional<String> jsonPath = findJsonFilePath(recipePath,name );
         String json ;
+
         if(jsonPath.isPresent()) {
-            log.debug("Json import Rezept Name: " + name);
-            log.debug("Json import Pfad: " + jsonPath.get());
+            log.info("Json import to String Rezept: " + name);
+            log.debug ("Json import to String Rezept Name: " + name + " Pfad: " + jsonPath.get());
             json = new String(Files.readAllBytes(Paths.get(jsonPath.get())));
             log.trace(json);
         }else{
-            log.error("Json Pfad fehlerhaft: " + jsonPath.get());
+            log.error("Json Pfad fehlerhaft: " + jsonPath.get()+"\\"+name);
             json = "{}";
         }
 

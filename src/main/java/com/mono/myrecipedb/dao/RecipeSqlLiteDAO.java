@@ -11,6 +11,6 @@ public interface RecipeSqlLiteDAO extends JpaRepository<RecipeSqlLite, Long> {
 
 
     RecipeSqlLite findById(int id );
-
     List<RecipeSqlLite> findAllByNameContaining(String name );
+
 }

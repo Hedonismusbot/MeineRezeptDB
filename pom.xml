@@ -58,11 +58,19 @@
             <artifactId>javaee-web-api</artifactId>
             <version>8.0</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
 
         <!-- JPA Hibernate-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
+
+            <!-- Aussschluss boot logger um eingenene zu benutzen-->
+
+
         </dependency>
 
         <dependency>
@@ -82,16 +90,9 @@
 
         <!--  #########################  Logggin  ######################### -->
 
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-api</artifactId>
-            <version>2.13.3</version>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-core</artifactId>
-            <version>2.13.3</version>
-        </dependency>
+        <!--  Loggin depoendencys nicht nötig weil schon vorhandewn von spring boot-->
+
+
 
 
 
