@@ -89,4 +89,14 @@ public class Review implements Serializable
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Review{" +
+                "type='" + type + '\'' +
+                ", reviewRating=" + reviewRating +
+                ", author=" + author +
+                ", datePublished='" + datePublished + '\'' +
+                ", reviewBody='" + reviewBody + '\'' +
+                '}';
+    }
 }

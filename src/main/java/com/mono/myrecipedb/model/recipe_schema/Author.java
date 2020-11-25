@@ -57,4 +57,12 @@ public class Author implements Serializable
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Author{" +
+                "type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", url='" + url + '\'' +
+                '}';
+    }
 }

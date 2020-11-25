@@ -26,6 +26,7 @@ public class RecipeServiceImpl implements RecipeService
 
     @PostConstruct
     public void init(){
+        //ACHTUNG Rezept Ordner wird in Main Klasse festgelegt
        refreshAllRecipesSqlLite(RECIPE_DIRECTORY_PATH);
     }
 
@@ -85,16 +86,13 @@ public class RecipeServiceImpl implements RecipeService
                 recipe.setFolderPath(recipefolderPath.toString());
                 recipe.setName(folderFile.getName());
                 recipe.setJson(jdao.importJsonFileToString(recipefolderPath.toString() , folderFile.getName() ));
-                log.debug("Rezept SQL hinzugefügt: " + recipe.getName());
-                log.trace("Daten RezeptSQL \n "+ recipe.toString() );
-                sqlLitedao.save(recipe);
                 importetRecipeList.add(recipe);
 
             } catch (Exception exception) {
                 log.error("Rezept SQL NICHT hinzugefügt :  Pfad: " +directoryPath +" Name: "+ folderFile.getName());
             }
         }
-        log.info("Rezepte in SqlLite importiert : " + importetRecipeList.size() );
+        log.info("Rezepte NICHT in SqlLite importiert aber gefunden in Ordner : " + importetRecipeList.size() );
 
         return importetRecipeList;
     }
@@ -116,13 +114,11 @@ public class RecipeServiceImpl implements RecipeService
     public List<Recipe> getAllRecipesWithNameContaining(String name) {
         List<RecipeSqlLite> resultlistSql = sqlLitedao.findAllByNameContaining(name);
         List<Recipe> resultlist = new ArrayList<>();
-        log.info("Suchanfrage SQL beinhaltet Name: " + name );
-        log.info("Ergebnis Anzahl : "+ resultlistSql.size());
+        log.info("Suchanfrage SQL nach Name beinhaltet: " + name +" Ergebnisse gefunden : "+ resultlistSql.size());
         for (RecipeSqlLite rez:resultlistSql) {
-
-            resultlist.add(new Recipe(rez.getId(), rez.getName()));
-            log.info("Rezept gefunden : "+ rez.getName());
-            log.trace("Rezept gefunden : "+ rez);
+            Recipe recipe = new Recipe(new RecipeSqlLite(rez.getId(), rez.getName(),rez.getFolderPath()));
+            resultlist.add(recipe);
+            log.trace("Rezept gefunden ID: "+recipe.getsqlLiteId()+ "Name: "+ recipe.getName()+ "OrdnerPfad: "+ recipe.getFolderPath() );
         }
 
         return resultlist;

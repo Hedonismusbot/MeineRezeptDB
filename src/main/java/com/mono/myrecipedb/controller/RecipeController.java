@@ -19,7 +19,7 @@ import static com.mono.myrecipedb.MainApplication.RECIPE_DIRECTORY_PATH;
 @RestController
 public class RecipeController {
 
-    //ACHTUNG Rezept Ordner wird in Main Klasse festgelegt
+
     public String directoryPath =RECIPE_DIRECTORY_PATH;
     static Logger log = LogManager.getLogger() ;
 

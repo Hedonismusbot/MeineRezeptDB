@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
+import com.mono.myrecipedb.model.RecipeSqlLite;
 
 public class Recipe  implements Serializable {
     @SerializedName("@context")
@@ -83,12 +84,16 @@ public class Recipe  implements Serializable {
     }
 
 
-    public Recipe(int id , String folderPath){
+    public Recipe(int id ,String name , String folderPath){
         setsqlLiteId(id);
+        setName(name);
         setFolderPath(folderPath);
     }
-
-
+    public Recipe(RecipeSqlLite recipeSqlLite){
+        setsqlLiteId(recipeSqlLite.getId());
+        setFolderPath(recipeSqlLite.getFolderPath());
+        setName(recipeSqlLite.getName());
+    }
 
 
     public int getsqlLiteId() {

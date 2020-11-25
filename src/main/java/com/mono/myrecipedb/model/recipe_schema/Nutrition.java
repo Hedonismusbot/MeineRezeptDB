@@ -218,4 +218,22 @@ public class Nutrition implements Serializable
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Nutrition{" +
+                "servingSize='" + servingSize + '\'' +
+                ", calories='" + calories + '\'' +
+                ", sugarContent='" + sugarContent + '\'' +
+                ", sodiumContent='" + sodiumContent + '\'' +
+                ", fatContent='" + fatContent + '\'' +
+                ", saturatedFatContent='" + saturatedFatContent + '\'' +
+                ", unsaturatedFatContent='" + unsaturatedFatContent + '\'' +
+                ", transFatContent='" + transFatContent + '\'' +
+                ", carbohydrateContent='" + carbohydrateContent + '\'' +
+                ", fiberContent='" + fiberContent + '\'' +
+                ", proteinContent='" + proteinContent + '\'' +
+                ", cholesterolContent='" + cholesterolContent + '\'' +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

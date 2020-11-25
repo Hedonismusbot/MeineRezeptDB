@@ -41,4 +41,11 @@ public class ReviewRating implements Serializable
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "ReviewRating{" +
+                "type='" + type + '\'' +
+                ", ratingValue='" + ratingValue + '\'' +
+                '}';
+    }
 }

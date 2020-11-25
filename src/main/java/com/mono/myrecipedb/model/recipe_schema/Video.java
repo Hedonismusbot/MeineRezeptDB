@@ -122,4 +122,16 @@ public class Video implements Serializable
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Video{" +
+                "context='" + context + '\'' +
+                ", type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", contentUrl='" + contentUrl + '\'' +
+                ", thumbnailUrl=" + thumbnailUrl +
+                ", uploadDate='" + uploadDate + '\'' +
+                '}';
+    }
 }

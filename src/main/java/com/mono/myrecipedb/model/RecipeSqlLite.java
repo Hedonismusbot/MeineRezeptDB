@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 @Entity (name = "recipes")//  Tabellenname im Mysql
-public class RecipeSqlLite {
+public class RecipeSqlLite{
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO) //Auto increment
@@ -19,6 +19,12 @@ public class RecipeSqlLite {
 
 
     public RecipeSqlLite() {
+    }
+
+    public RecipeSqlLite(int id , String name , String folderPath ) {
+        this.id = id ;
+        this.name = name ;
+        this.folderPath = folderPath ;
     }
 
     public String getName() {

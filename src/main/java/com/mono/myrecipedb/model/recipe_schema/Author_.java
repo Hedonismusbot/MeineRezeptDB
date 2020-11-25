@@ -41,4 +41,11 @@ public class Author_ implements Serializable
         return this;
     }
 
+    @Override
+    public String toString() {
+        return "Author_{" +
+                "type='" + type + '\'' +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
