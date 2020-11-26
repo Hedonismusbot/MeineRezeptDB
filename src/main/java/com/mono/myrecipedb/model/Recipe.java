@@ -24,7 +24,7 @@ public class Recipe implements Serializable {
 
     public Recipe() {
     }
-
+    @SuppressWarnings("unused")
     public Recipe(int id , String name , String folderPath ) {
         this.id = id ;
         this.name = name ;
@@ -55,6 +55,7 @@ public class Recipe implements Serializable {
         return id;
     }
 
+    @SuppressWarnings("unused")
     public void setId(int id) {
         this.id = id;
     }

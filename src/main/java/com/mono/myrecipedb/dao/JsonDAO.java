@@ -18,8 +18,8 @@ public class JsonDAO {
 
 
     public JsonDataRecipe convertJsonStringToJavaObject (String json){
-        JsonDataRecipe importedJsonDataRecipe = new JsonDataRecipe();
-        //Create a new Gson object
+        JsonDataRecipe importedJsonDataRecipe;
+
         Gson gson = new Gson();
 
         //convert the json to  Java object (JsonDataRecipe)
@@ -35,8 +35,8 @@ public class JsonDAO {
      * Importiert Json File und convertiert nach String <p/>
      *( wenn Pfad fehlerhaft wird "{}" zurückgegeben )
      *
-     * @param recipePath
-     * @param name
+     * @param recipePath Ordner PFad
+     * @param name Name
      * @return String
      */
     public String importJsonFileToString(String recipePath , String name ) throws Exception {
@@ -49,7 +49,7 @@ public class JsonDAO {
             json = new String(Files.readAllBytes(Paths.get(jsonPath.get())));
             log.trace(json);
         }else{
-            log.error("Json Pfad fehlerhaft: " + jsonPath.get()+"\\"+name);
+            log.error("Json Pfad fehlerhaft: " + recipePath+"\\"+name);
             json = "{}";
         }
 
@@ -59,8 +59,8 @@ public class JsonDAO {
     /**
      * Holt Pfad der JsonDatei ( Datei kann entweder "recipe" oder den Rezeptnamen haben)
      *
-     * @param recipePath
-     * @param name
+     * @param recipePath Ordner Pfad
+     * @param name Rezept Name
      * @return Optional<String>
      */
     public Optional<String> findJsonFilePath (String recipePath , String name ){

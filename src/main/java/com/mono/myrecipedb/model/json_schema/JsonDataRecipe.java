@@ -7,6 +7,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 import com.mono.myrecipedb.model.Recipe;
 
+@SuppressWarnings("unused")
 public class JsonDataRecipe implements Serializable {
     @SerializedName("@context")
     @Expose
@@ -76,41 +77,6 @@ public class JsonDataRecipe implements Serializable {
     private List<Object> tool = null;
     private final static long serialVersionUID = 930431040469941610L;
 
-    // Variablen
-    private int sqlLiteId;
-    private String folderPath;
-
-    public JsonDataRecipe(){
-    }
-
-
-    public JsonDataRecipe(int id , String name , String folderPath){
-        setsqlLiteId(id);
-        setName(name);
-        setFolderPath(folderPath);
-    }
-    public JsonDataRecipe(Recipe recipeSqlLite){
-        setsqlLiteId(recipeSqlLite.getId());
-        setFolderPath(recipeSqlLite.getFolderPath());
-        setName(recipeSqlLite.getName());
-    }
-
-
-    public int getsqlLiteId() {
-        return sqlLiteId;
-    }
-
-    public void setsqlLiteId(int id) {
-        this.sqlLiteId = id;
-    }
-
-    public String getFolderPath() {
-        return folderPath;
-    }
-
-    public void setFolderPath(String folderPath) {
-        this.folderPath = folderPath;
-    }
 
     public String getContext() {
         return context;
@@ -423,8 +389,6 @@ public class JsonDataRecipe implements Serializable {
                 ",\n review=" + review +
                 ",\n datePublished='" + datePublished + '\'' +
                 ",\n tool=" + tool +
-                ",\n mySQLLiteId=" + sqlLiteId +
-                ",\n folderPath='" + folderPath + '\'' +
                 '}';
     }
 }

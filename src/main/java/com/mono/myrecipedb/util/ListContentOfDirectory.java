@@ -15,15 +15,15 @@ public class ListContentOfDirectory {
     /**
      * Erzeugt Liste der Unterordnernamen <p/> (nicht recursiv | ignoriert Files)
      *
-     * @param directoryPath
-     * @return list
+     * @param directoryPath Rezept Ordner Pfad
+     * @return Liste Rezept Namen
      */
 
     public static List<File> listContent (String directoryPath){
         //Creating a File object for directory
         File filedirectoryPath = new File(directoryPath);
         String [] contents = filedirectoryPath.list();
-        List<File> list = new ArrayList();
+        ArrayList<File> list = new ArrayList();
         Optional<String[]> opt = Optional.ofNullable(contents);
         log.info("Listing contents of: " + directoryPath );
         if (opt.isPresent()) {
