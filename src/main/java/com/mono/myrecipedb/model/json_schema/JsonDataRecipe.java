@@ -1,13 +1,13 @@
-package com.mono.myrecipedb.model.recipe_schema;
+package com.mono.myrecipedb.model.json_schema;
 
 import java.io.Serializable;
 import java.util.List;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.mono.myrecipedb.model.RecipeSqlLite;
+import com.mono.myrecipedb.model.Recipe;
 
-public class Recipe  implements Serializable {
+public class JsonDataRecipe implements Serializable {
     @SerializedName("@context")
     @Expose
     private String context;
@@ -80,16 +80,16 @@ public class Recipe  implements Serializable {
     private int sqlLiteId;
     private String folderPath;
 
-    public Recipe(){
+    public JsonDataRecipe(){
     }
 
 
-    public Recipe(int id ,String name , String folderPath){
+    public JsonDataRecipe(int id , String name , String folderPath){
         setsqlLiteId(id);
         setName(name);
         setFolderPath(folderPath);
     }
-    public Recipe(RecipeSqlLite recipeSqlLite){
+    public JsonDataRecipe(Recipe recipeSqlLite){
         setsqlLiteId(recipeSqlLite.getId());
         setFolderPath(recipeSqlLite.getFolderPath());
         setName(recipeSqlLite.getName());
@@ -120,7 +120,7 @@ public class Recipe  implements Serializable {
         this.context = context;
     }
 
-    public Recipe withContext(String context) {
+    public JsonDataRecipe withContext(String context) {
         this.context = context;
         return this;
     }
@@ -133,7 +133,7 @@ public class Recipe  implements Serializable {
         this.type = type;
     }
 
-    public Recipe withType(String type) {
+    public JsonDataRecipe withType(String type) {
         this.type = type;
         return this;
     }
@@ -146,7 +146,7 @@ public class Recipe  implements Serializable {
         this.name = name;
     }
 
-    public Recipe withName(String name) {
+    public JsonDataRecipe withName(String name) {
         this.name = name;
         return this;
     }
@@ -159,7 +159,7 @@ public class Recipe  implements Serializable {
         this.description = description;
     }
 
-    public Recipe withDescription(String description) {
+    public JsonDataRecipe withDescription(String description) {
         this.description = description;
         return this;
     }
@@ -172,7 +172,7 @@ public class Recipe  implements Serializable {
         this.author = author;
     }
 
-    public Recipe withAuthor(Author author) {
+    public JsonDataRecipe withAuthor(Author author) {
         this.author = author;
         return this;
     }
@@ -185,7 +185,7 @@ public class Recipe  implements Serializable {
         this.keywords = keywords;
     }
 
-    public Recipe withKeywords(String keywords) {
+    public JsonDataRecipe withKeywords(String keywords) {
         this.keywords = keywords;
         return this;
     }
@@ -198,7 +198,7 @@ public class Recipe  implements Serializable {
         this.image = image;
     }
 
-    public Recipe withImage(String image) {
+    public JsonDataRecipe withImage(String image) {
         this.image = image;
         return this;
     }
@@ -211,7 +211,7 @@ public class Recipe  implements Serializable {
         this.url = url;
     }
 
-    public Recipe withUrl(String url) {
+    public JsonDataRecipe withUrl(String url) {
         this.url = url;
         return this;
     }
@@ -224,7 +224,7 @@ public class Recipe  implements Serializable {
         this.recipeIngredient = recipeIngredient;
     }
 
-    public Recipe withRecipeIngredient(List<String> recipeIngredient) {
+    public JsonDataRecipe withRecipeIngredient(List<String> recipeIngredient) {
         this.recipeIngredient = recipeIngredient;
         return this;
     }
@@ -237,7 +237,7 @@ public class Recipe  implements Serializable {
         this.recipeInstructions = recipeInstructions;
     }
 
-    public Recipe withRecipeInstructions(List<String> recipeInstructions) {
+    public JsonDataRecipe withRecipeInstructions(List<String> recipeInstructions) {
         this.recipeInstructions = recipeInstructions;
         return this;
     }
@@ -250,7 +250,7 @@ public class Recipe  implements Serializable {
         this.prepTime = prepTime;
     }
 
-    public Recipe withPrepTime(String prepTime) {
+    public JsonDataRecipe withPrepTime(String prepTime) {
         this.prepTime = prepTime;
         return this;
     }
@@ -263,7 +263,7 @@ public class Recipe  implements Serializable {
         this.cookTime = cookTime;
     }
 
-    public Recipe withCookTime(String cookTime) {
+    public JsonDataRecipe withCookTime(String cookTime) {
         this.cookTime = cookTime;
         return this;
     }
@@ -276,7 +276,7 @@ public class Recipe  implements Serializable {
         this.totalTime = totalTime;
     }
 
-    public Recipe withTotalTime(String totalTime) {
+    public JsonDataRecipe withTotalTime(String totalTime) {
         this.totalTime = totalTime;
         return this;
     }
@@ -289,7 +289,7 @@ public class Recipe  implements Serializable {
         this.recipeYield = recipeYield;
     }
 
-    public Recipe withRecipeYield(Integer recipeYield) {
+    public JsonDataRecipe withRecipeYield(Integer recipeYield) {
         this.recipeYield = recipeYield;
         return this;
     }
@@ -302,7 +302,7 @@ public class Recipe  implements Serializable {
         this.recipeCategory = recipeCategory;
     }
 
-    public Recipe withRecipeCategory(String recipeCategory) {
+    public JsonDataRecipe withRecipeCategory(String recipeCategory) {
         this.recipeCategory = recipeCategory;
         return this;
     }
@@ -315,7 +315,7 @@ public class Recipe  implements Serializable {
         this.cookingMethod = cookingMethod;
     }
 
-    public Recipe withCookingMethod(String cookingMethod) {
+    public JsonDataRecipe withCookingMethod(String cookingMethod) {
         this.cookingMethod = cookingMethod;
         return this;
     }
@@ -328,7 +328,7 @@ public class Recipe  implements Serializable {
         this.recipeCuisine = recipeCuisine;
     }
 
-    public Recipe withRecipeCuisine(String recipeCuisine) {
+    public JsonDataRecipe withRecipeCuisine(String recipeCuisine) {
         this.recipeCuisine = recipeCuisine;
         return this;
     }
@@ -341,7 +341,7 @@ public class Recipe  implements Serializable {
         this.aggregateRating = aggregateRating;
     }
 
-    public Recipe withAggregateRating(AggregateRating aggregateRating) {
+    public JsonDataRecipe withAggregateRating(AggregateRating aggregateRating) {
         this.aggregateRating = aggregateRating;
         return this;
     }
@@ -354,7 +354,7 @@ public class Recipe  implements Serializable {
         this.nutrition = nutrition;
     }
 
-    public Recipe withNutrition(Nutrition nutrition) {
+    public JsonDataRecipe withNutrition(Nutrition nutrition) {
         this.nutrition = nutrition;
         return this;
     }
@@ -367,7 +367,7 @@ public class Recipe  implements Serializable {
         this.review = review;
     }
 
-    public Recipe withReview(List<Review> review) {
+    public JsonDataRecipe withReview(List<Review> review) {
         this.review = review;
         return this;
     }
@@ -380,7 +380,7 @@ public class Recipe  implements Serializable {
         this.datePublished = datePublished;
     }
 
-    public Recipe withDatePublished(String datePublished) {
+    public JsonDataRecipe withDatePublished(String datePublished) {
         this.datePublished = datePublished;
         return this;
     }
@@ -393,14 +393,14 @@ public class Recipe  implements Serializable {
         this.tool = tool;
     }
 
-    public Recipe withTool(List<Object> tool) {
+    public JsonDataRecipe withTool(List<Object> tool) {
         this.tool = tool;
         return this;
     }
 
     @Override
     public String toString() {
-        return "Recipe{" +
+        return "JsonDataRecipe{" +
                 "context='" + context + '\'' +
                 ",\n type='" + type + '\'' +
                 ",\n name='" + name + '\'' +

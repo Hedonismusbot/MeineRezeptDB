@@ -1,11 +1,14 @@
 package com.mono.myrecipedb.model;
 
 
+import com.mono.myrecipedb.model.json_schema.JsonDataRecipe;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 
 @Entity (name = "recipes")//  Tabellenname im Mysql
-public class RecipeSqlLite{
+public class Recipe implements Serializable {
 
     @Id
     @GeneratedValue (strategy = GenerationType.AUTO) //Auto increment
@@ -16,13 +19,13 @@ public class RecipeSqlLite{
     private String folderPath;
     @Column(nullable = false)
     private String json;
+    @Transient                                      // dadruch durch JPA ignoriert
+    private JsonDataRecipe jsonDataObject = null;
 
-
-    public RecipeSqlLite() {
-        //test
+    public Recipe() {
     }
 
-    public RecipeSqlLite(int id , String name , String folderPath ) {
+    public Recipe(int id , String name , String folderPath ) {
         this.id = id ;
         this.name = name ;
         this.folderPath = folderPath ;
@@ -44,7 +47,7 @@ public class RecipeSqlLite{
         this.json = json;
     }
 
-    public RecipeSqlLite(String folderPath) {
+    public Recipe(String folderPath) {
         this.folderPath = folderPath;
     }
 
@@ -64,13 +67,22 @@ public class RecipeSqlLite{
         this.folderPath = folderPath;
     }
 
+    public JsonDataRecipe getJsonDataObject() {
+        return jsonDataObject;
+    }
+
+    public void setJsonDataObject(JsonDataRecipe jsonDataObject) {
+        this.jsonDataObject = jsonDataObject;
+    }
+
     @Override
     public String toString() {
-        return "RecipeSqlLite{" +
+        return "Recipe{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", folderPath='" + folderPath + '\'' +
                 ", json='" + json + '\'' +
+                ", jsonDataObject=" + jsonDataObject +
                 '}';
     }
 }

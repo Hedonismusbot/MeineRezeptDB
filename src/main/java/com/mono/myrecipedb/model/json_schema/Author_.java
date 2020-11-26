@@ -1,4 +1,4 @@
-package com.mono.myrecipedb.model.recipe_schema;
+package com.mono.myrecipedb.model.json_schema;
 
 import java.io.Serializable;
 import com.google.gson.annotations.Expose;

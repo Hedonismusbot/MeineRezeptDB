@@ -51,8 +51,7 @@
             <version>4.3.4</version>
         </dependency>
 
-        <!-- jee web -named -->
-
+        <!-- jee web -named (für Inject / Autowired) -->
         <dependency>
             <groupId>javax</groupId>
             <artifactId>javaee-web-api</artifactId>

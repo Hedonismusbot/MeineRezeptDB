@@ -2,7 +2,7 @@ package com.mono.myrecipedb.dao;
 
 
 import com.google.gson.Gson;
-import com.mono.myrecipedb.model.recipe_schema.Recipe;
+import com.mono.myrecipedb.model.json_schema.JsonDataRecipe;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,18 +17,18 @@ public class JsonDAO {
     static Logger log = LogManager.getLogger() ;
 
 
-    public Recipe convertJsonStringToJavaObject (String json){
-        Recipe importedRecipe = new Recipe();
+    public JsonDataRecipe convertJsonStringToJavaObject (String json){
+        JsonDataRecipe importedJsonDataRecipe = new JsonDataRecipe();
         //Create a new Gson object
         Gson gson = new Gson();
 
-        //convert the json to  Java object (Recipe)
-        importedRecipe = gson.fromJson(json, Recipe.class);
+        //convert the json to  Java object (JsonDataRecipe)
+        importedJsonDataRecipe = gson.fromJson(json, JsonDataRecipe.class);
 
-        log.debug(importedRecipe.toString());
+        log.debug(importedJsonDataRecipe.toString());
 
 
-        return importedRecipe;
+        return importedJsonDataRecipe;
     }
 
     /**

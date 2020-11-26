@@ -2,8 +2,7 @@ package com.mono.myrecipedb.service;
 
 import com.mono.myrecipedb.dao.JsonDAO;
 import com.mono.myrecipedb.dao.RecipeSqlLiteDAO;
-import com.mono.myrecipedb.model.RecipeSqlLite;
-import com.mono.myrecipedb.model.recipe_schema.Recipe;
+import com.mono.myrecipedb.model.Recipe;
 import com.mono.myrecipedb.util.ListContentOfDirectory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -14,6 +13,7 @@ import javax.annotation.PostConstruct;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import static com.mono.myrecipedb.MainApplication.RECIPE_DIRECTORY_PATH;
 
 @Service
@@ -31,27 +31,28 @@ public class RecipeServiceImpl implements RecipeService
     }
 
     @Override
-    public List<RecipeSqlLite> refreshAllRecipesSqlLite(String directoryPath) {
+    public List<Recipe> refreshAllRecipesSqlLite(String directoryPath) {
         // Erzeugt Ordner Namensliste (Entspricht -> Pfad/RezeptNamen)
         List <File> listofFolderFiles =  ListContentOfDirectory.listContent(directoryPath) ;
         JsonDAO jdao = new JsonDAO () ;
-        List <RecipeSqlLite> importetRecipeList =  new ArrayList<>();
+        List <Recipe> importetRecipeList =  new ArrayList<>();
 
         deleteAllRecipeSqlLite();
 
         for ( File folderFile: listofFolderFiles) {
             try {
+                Recipe recipe = new Recipe(directoryPath);
                 StringBuilder recipefolderPath= new StringBuilder() ;
-                RecipeSqlLite recipe = new RecipeSqlLite();
 
-                recipefolderPath = recipefolderPath.append(directoryPath).append("\\").append(folderFile.getName());
+                recipefolderPath.append("\\").append(folderFile.getName());
                 recipe.setFolderPath(recipefolderPath.toString());
                 recipe.setName(folderFile.getName());
                 recipe.setJson(jdao.importJsonFileToString(recipefolderPath.toString() , folderFile.getName() ));
-                log.debug("Rezept SQL hinzugefügt: " + recipe.getName());
-                log.trace("Daten RezeptSQL \n "+ recipe.toString() );
+
                 sqlLitedao.save(recipe);
                 importetRecipeList.add(recipe);
+                log.debug("Rezept SQL hinzugefügt: " + recipe.getName());
+                log.trace("Daten RezeptSQL \n "+ recipe.toString() );
 
             } catch (Exception exception) {
                 log.error("Rezept SQL NICHT hinzugefügt :  Pfad: " +directoryPath +" Name: "+ folderFile.getName());
@@ -64,35 +65,37 @@ public class RecipeServiceImpl implements RecipeService
     }
 
     public void deleteAllRecipeSqlLite(){
-        //TODO Alle SQLdaten löschen fehlerhaft
         sqlLitedao.deleteAll();
-        log.debug(" #################      Rezepte SQL alle gelöscht    #################    " );
+        log.debug(" #################    Alle  Rezepte SQL  gelöscht    #################    " );
 
     }
 
     @Override
-    public List<RecipeSqlLite> getAllRecipeNamesByFolder(String directoryPath) {
+    public List<Recipe> getAllRecipeNamesByFolder(String directoryPath) {
         // Erzeugt Ordner Namensliste (Entspricht -> Pfad/RezeptNamen)
         List <File> listofFolderFiles =  ListContentOfDirectory.listContent(directoryPath) ;
         JsonDAO jdao = new JsonDAO () ;
-        List <RecipeSqlLite> importetRecipeList =  new ArrayList<>();
+        List <Recipe> importetRecipeList =  new ArrayList<>();
 
         for ( File folderFile: listofFolderFiles) {
             try {
-                StringBuilder recipefolderPath= new StringBuilder() ;
-                RecipeSqlLite recipe = new RecipeSqlLite();
+                Recipe recipe = new Recipe();
+                StringBuilder recipefolderPath= new StringBuilder(directoryPath) ;
 
-                recipefolderPath = recipefolderPath.append(directoryPath).append("\\").append(folderFile.getName());
+                recipefolderPath.append("\\").append(folderFile.getName());
                 recipe.setFolderPath(recipefolderPath.toString());
                 recipe.setName(folderFile.getName());
                 recipe.setJson(jdao.importJsonFileToString(recipefolderPath.toString() , folderFile.getName() ));
+
                 importetRecipeList.add(recipe);
+                log.debug("Rezept Ordner gefunden Name: " + recipe.getName());
+                log.trace("Rezept Ordner gefunden : "+ recipe.toString() );
 
             } catch (Exception exception) {
                 log.error("Rezept SQL NICHT hinzugefügt :  Pfad: " +directoryPath +" Name: "+ folderFile.getName());
             }
         }
-        log.info("Rezepte NICHT in SqlLite importiert aber gefunden in Ordner : " + importetRecipeList.size() );
+        log.info("Rezepte NICHT in SqlLite importiert aber gefunden in Ordner Anzahl: " + importetRecipeList.size() );
 
         return importetRecipeList;
     }
@@ -102,25 +105,36 @@ public class RecipeServiceImpl implements RecipeService
     @Override
     public Recipe findRecipeById(int id) {
         JsonDAO jdao = new JsonDAO () ;
-        Recipe resultRecipe = new Recipe();
-        RecipeSqlLite resultRecipeSql = sqlLitedao.findById(id);
-        resultRecipe = jdao.convertJsonStringToJavaObject(resultRecipeSql.getJson());
-        resultRecipe.setsqlLiteId(resultRecipeSql.getId());
-        resultRecipe.setFolderPath(resultRecipeSql.getFolderPath());
+        Recipe resultRecipe = sqlLitedao.findById(id);
+        log.info(" Gefundenes Rezept Id: " + resultRecipe.getId() + " Name: " + resultRecipe.getName());
+        resultRecipe.setJsonDataObject( jdao.convertJsonStringToJavaObject(resultRecipe.getJson()));
+        log.trace(" Gefundenes Rezept : " + resultRecipe.toString());
         return resultRecipe;
     }
 
     @Override
     public List<Recipe> getAllRecipesWithNameContaining(String name) {
-        List<RecipeSqlLite> resultlistSql = sqlLitedao.findAllByNameContaining(name);
-        List<Recipe> resultlist = new ArrayList<>();
-        log.info("Suchanfrage SQL nach Name beinhaltet: " + name +" Ergebnisse gefunden : "+ resultlistSql.size());
-        for (RecipeSqlLite rez:resultlistSql) {
-            Recipe recipe = new Recipe(new RecipeSqlLite(rez.getId(), rez.getName(),rez.getFolderPath()));
-            resultlist.add(recipe);
-            log.trace("Rezept gefunden ID: "+recipe.getsqlLiteId()+ "Name: "+ recipe.getName()+ "OrdnerPfad: "+ recipe.getFolderPath() );
+        List<Recipe> resultlist = sqlLitedao.findAllByNameContaining(name); // (case insensitiv)
+        log.info("Suchanfrage SQL nach Name beinhaltet: '" + name +"'  Ergebnisse gefunden : "+ resultlist.size());
+        for (Recipe rez:resultlist) {
+            log.debug("Rezept gefunden ID: "+ rez.getId()+
+                                    " Name: "+ rez.getName()+
+                                    " OrdnerPfad: "+ rez.getFolderPath());
+            log.trace(" JsonString : " + rez.getJson());
         }
 
         return resultlist;
+    }
+
+    @Override
+    public Recipe save(Recipe newRecipe) {
+        log.debug(newRecipe);
+        Recipe result = sqlLitedao.save(newRecipe);
+        if ( result.getId() != 0 ){
+            log.info("Erolgreich gespeichert");
+
+        }
+        log.trace(" Gespeichert, antwort Objekt: "+ result);
+        return result;
     }
 }
